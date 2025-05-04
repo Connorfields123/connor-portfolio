@@ -11,7 +11,7 @@ cd /home/ubuntu/server
 
 # Download latest PaperMC
 LATEST_VERSION=$(curl -s https://api.papermc.io/v2/projects/paper | jq -r '.versions[-1]')
-LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/paper/versions/'$LATEST_VERSION' | jq -r '.builds[-1]')
+LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/paper/versions/"$LATEST_VERSION" | jq -r '.builds[-1]')
 PAPER_URL="https://api.papermc.io/v2/projects/paper/versions/$LATEST_VERSION/builds/$LATEST_BUILD/downloads/paper-$LATEST_VERSION-$LATEST_BUILD.jar"
 
 curl -o paper.jar "$PAPER_URL"
