@@ -24,7 +24,7 @@ export class ConnorMcsServer extends cdk.Stack {
             allowAllOutbound: true,
         });
         sg.addIngressRule(
-            ec2.Peer.ipv4(`${config.myIp}/32`),
+            ec2.Peer.ipv4(config.myIp),
             ec2.Port.tcp(22),
             'Allow SSH from my IP'
         );
