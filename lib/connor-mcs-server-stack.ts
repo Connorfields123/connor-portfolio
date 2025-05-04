@@ -23,7 +23,8 @@ export class ConnorMcsServer extends cdk.Stack {
             vpcSubnets: {
               subnetType: ec2.SubnetType.PUBLIC,
             },
-            instanceName: 'public-minecraft-server'
+            instanceName: 'public-minecraft-server',
+            keyName: "mcserver"
         });
 
         // export instance id incase needed in other stacks

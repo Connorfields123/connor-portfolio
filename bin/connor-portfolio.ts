@@ -9,7 +9,7 @@ const s3Bucket = new ConnorPortfolioStack(app, 'ConnorPortfolioStack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 });
 
-const server = new ConnorMcsServer(app, 'ConnorPortfolioStack', {
+const server = new ConnorMcsServer(app, 'ConnorMCServerStack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 
 });
