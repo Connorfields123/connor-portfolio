@@ -18,6 +18,22 @@ export class ConnorMcsServer extends cdk.Stack {
         // use default vpc
         const vpc = ec2.Vpc.fromLookup(this, "default-vpc", {isDefault: true});
 
+        const sg = new ec2.SecurityGroup(this, 'MinecraftSG', {
+            vpc,
+            description: 'Allow SSH and Minecraft access',
+            allowAllOutbound: true,
+        });
+        sg.addIngressRule(
+            ec2.Peer.ipv4(`${config.myIp}/32`),
+            ec2.Port.tcp(22),
+            'Allow SSH from my IP'
+        );
+        sg.addIngressRule(
+            ec2.Peer.anyIpv4(),
+            ec2.Port.tcp(25565),
+            'Allow Minecraft access'
+        );
+
         // arm linux 2 server with 2 vCPU and 8G Memory
         const minecraftServer = new ec2.Instance(this, 'MinecraftInstance', {
             vpc,
@@ -29,7 +45,8 @@ export class ConnorMcsServer extends cdk.Stack {
               subnetType: ec2.SubnetType.PUBLIC,
             },
             instanceName: 'public-minecraft-server',
-            keyName: "mcserver"
+            keyName: "mcserver",
+            securityGroup: sg
         });
 
         // export instance id incase needed in other stacks
