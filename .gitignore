@@ -3,6 +3,7 @@
 *.d.ts
 node_modules
 aws-login.txt
+mcserver.pem
 
 # CDK asset staging directory
 .cdk.staging
