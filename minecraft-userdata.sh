@@ -2,8 +2,9 @@
 set -e
 
 # Update system and install dependencies
-apt-get update -y
-apt-get install -y openjdk-17-jre-headless curl jq screen unzip
+yum update -y
+amazon-linux-extras install -y java-openjdk17
+yum install -y curl jq screen unzip
 
 # Create minecraft user and server directories
 useradd -m -s /bin/bash minecraft

@@ -17,14 +17,14 @@ export class ConnorMcsServer extends cdk.Stack {
         const minecraftServer = new ec2.Instance(this, 'MinecraftInstance', {
             vpc,
             instanceType: new ec2.InstanceType('t4g.large'),
-            machineImage: ec2.MachineImage.genericLinux({
-              'us-east-1': 'ami-0a0c8eebcdd6dcbd0',
+            machineImage: ec2.MachineImage.latestAmazonLinux2({
+              cpuType: ec2.AmazonLinuxCpuType.ARM_64,
             }),
             vpcSubnets: {
               subnetType: ec2.SubnetType.PUBLIC,
             },
             instanceName: 'public-minecraft-server',
-            keyName: "mcserver"
+            keyPair: ec2.KeyPair.fromKeyPairName(this, 'ImportedKeyPair', "mcserver")
         });
 
         // export instance id incase needed in other stacks
