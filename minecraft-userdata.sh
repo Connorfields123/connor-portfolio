@@ -3,7 +3,7 @@ set -e
 
 # Update system and install dependencies
 yum update -y
-amazon-linux-extras install -y java-openjdk17
+amazon-linux-extras install -y java-openjdk11
 yum install -y curl jq screen unzip
 
 # Create minecraft user and server directories
