@@ -13,6 +13,14 @@ export class ConnorMcsServer extends cdk.Stack {
         // use default vpc
         const vpc = ec2.Vpc.fromLookup(this, "default-vpc", {isDefault: true});
 
+        const securityGroup = new ec2.SecurityGroup(this, 'server-sg', {
+            vpc: vpc,
+            allowAllOutbound: true
+        });
+
+        securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(25565), 'Allow Minecraft Connection');
+        securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(22), 'Allow SSH Connection');
+
         // arm linux 2 server with 2 vCPU and 8G Memory
         const minecraftServer = new ec2.Instance(this, 'MinecraftInstance', {
             vpc,
