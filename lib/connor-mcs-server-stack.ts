@@ -32,7 +32,8 @@ export class ConnorMcsServer extends cdk.Stack {
               subnetType: ec2.SubnetType.PUBLIC,
             },
             instanceName: 'public-minecraft-server',
-            keyPair: ec2.KeyPair.fromKeyPairName(this, 'ImportedKeyPair', "mcserver")
+            keyPair: ec2.KeyPair.fromKeyPairName(this, 'ImportedKeyPair', "mcserver"),
+            securityGroup: securityGroup
         });
 
         // export instance id incase needed in other stacks
