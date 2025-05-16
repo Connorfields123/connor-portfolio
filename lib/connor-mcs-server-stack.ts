@@ -45,9 +45,6 @@ export class ConnorMcsServer extends cdk.Stack {
         const userDataScript = fs.readFileSync('minecraft-userdata.sh', 'utf8');
         minecraftServer.addUserData(userDataScript);
 
-        // open minecraft connection port
-        minecraftServer.connections.allowFromAnyIpv4(ec2.Port.tcp(25565), 'Allow Minecraft Connections');
-
         // give server full access to s3
         minecraftServer.role.addManagedPolicy(
             iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonS3FullAccess') // or create a tighter custom policy
